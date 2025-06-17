@@ -24,7 +24,7 @@ jobs:
       
       - name: Run Blog Generator
         run: |
-          python scraping/scraper.py
+          python scraping/scraper.py  # Make sure folder name matches
           python keyword_extraction/seo_keywords.py
           python blog_generation/blog_writer.py
           python deployment/publish.py
