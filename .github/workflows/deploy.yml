@@ -1,0 +1,30 @@
+name: Auto Deploy SEO Blog
+
+on: 
+  push:
+    branches:
+      - main  # Runs when changes are pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Run Blog Generator
+        run: |
+          python scraping/scraper.py
+          python keyword_extraction/seo_keywords.py
+          python blog_generation/blog_writer.py
+          python deployment/publish.py
